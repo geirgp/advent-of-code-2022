@@ -3,7 +3,7 @@ class Dec06() {
     /**
      * first position where the four most recently received characters were all different
      */
-    fun startOfPacketMarker(packet: String): Int {
+    fun startOfPacketMarkerIndex(packet: String): Int {
         for (i in 0..packet.length - 4 - 1) {
             if( packet.startOfPacketMarkerAt(i))
                 return i +4
