@@ -26,4 +26,19 @@ internal class Dec06Test {
             assertEquals(1578, position)
         }
     }
+
+    @Test
+    fun verifyExample2() {
+        mapOf(
+            "mjqjpqmgbljsphdztnvjfqwrcgsmlb" to 19,
+            "bvwbjplbgvbhsrlpgdmjqwftvncz" to 23,
+            "nppdvjthqldpwncqszvftbrmjlhg" to 23,
+            "nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg" to 29,
+            "zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw" to 26,
+        )
+            .forEach { (chars, charsNeeded) ->
+                println(chars)
+                assertEquals(charsNeeded, Dec06().startOfMessageMarkerIndex(chars))
+            }
+    }
 }
