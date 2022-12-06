@@ -1,15 +1,18 @@
 class Dec06() {
 
     /**
-     * first position where the four most recently received characters were all different
+     * Locates start-of-packet marker in [datastream] and returns the position of where the packet starts.
      */
-    fun startOfPacketMarkerIndex(packet: String): Int =
-        packet.endOfMarkerPosition(4)
+    fun startOfPacketIndex(datastream: String): Int =
+        datastream.endOfDistinctMarkerIndex(4)
 
-    fun startOfMessageMarkerIndex(packet: String): Int =
-        packet.endOfMarkerPosition(14)
+    /**
+     * Locates start-of-message marker in [datastream] and returns the position of where the message starts.
+     */
+    fun startOfMessageIndex(datastream: String): Int =
+        datastream.endOfDistinctMarkerIndex(14)
 
-    private fun String.endOfMarkerPosition(markerLength: Int): Int {
+    private fun String.endOfDistinctMarkerIndex(markerLength: Int): Int {
         for (i in 0 until length - markerLength) {
             if (distinctCharacterSequenceAt(i, markerLength))
                 return i + markerLength
@@ -17,12 +20,13 @@ class Dec06() {
         throw RuntimeException("marker not found")
     }
 
+    /**
+     * Returns true if the substring starting at [index] with a length of [sequenceLength] contains all unique characters.
+     */
     private fun String.distinctCharacterSequenceAt(index: Int, sequenceLength: Int) =
         substring(index, index + sequenceLength)
             .toCharArray()
             .map { it.code }
             .distinct()
             .count() == sequenceLength
-
-
 }
